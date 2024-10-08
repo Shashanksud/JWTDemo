@@ -18,9 +18,10 @@ namespace OgmentoAPI.Domain.Authorization.Abstractions.Models
         public string Password { get; set; }
 
         public string UserRole { get; set; }
-        public string City { get; set; }
+		public string City { get; set; }
 
-        public Dictionary<Guid, string> SalesCenters { get; set; }
+		public string  KioskName { get; set; }
+		public Dictionary<Guid, string> SalesCenters { get; set; }
         public int? ValidityDays {  get; set; }
        
     

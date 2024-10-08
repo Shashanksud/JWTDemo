@@ -93,7 +93,6 @@ namespace OgmentoAPI.Domain.Client.Services
         //         return   _salesCenterRepository.GetUserSalesCenterMappingId(salesCenterUid);
         //        }
         //        catch (Exception ex)
-
         //        {
         //            throw ex;
         //        }

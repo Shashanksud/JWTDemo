@@ -85,7 +85,7 @@ namespace OgmentoAPI.Domain.Authorization.Infrastructure.Repository
         {
             UsersMaster userMaster = new UsersMaster()
             {
-             //   UserUid = Guid.NewGuid(),
+              UserUid = Guid.NewGuid(),
                 UpdatedOn = DateTime.UtcNow,
                 CreatedOn = DateTime.UtcNow,
                 UserName = user.UserName,

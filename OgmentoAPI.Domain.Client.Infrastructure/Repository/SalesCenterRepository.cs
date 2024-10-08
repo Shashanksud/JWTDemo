@@ -76,9 +76,10 @@ namespace OgmentoAPI.Domain.Client.Infrastructure.Repository
 
         public int? UpdateMainSalesCenter(SalesCenterModel salesCenterModel)
         {
-            SalesCenter salesCenter = _context.SalesCenter.FirstOrDefault(x => x.SalesCenterUid == salesCenterModel.SalesCenterUid);
+			SalesCenter salesCenter = GetSalesCenterDetail(salesCenterModel.SalesCenterUid);
 
-            if (salesCenter == null)
+
+			if (salesCenter == null)
             {
                 return null;
             }
@@ -114,7 +115,7 @@ namespace OgmentoAPI.Domain.Client.Infrastructure.Repository
 
         public int? DeleteSalesCenter(Guid salesCenterUid)
         {
-            SalesCenter salesCenter = _context.SalesCenter.FirstOrDefault(x => x.SalesCenterUid == salesCenterUid);
+            SalesCenter salesCenter =GetSalesCenterDetail(salesCenterUid);
 
             if (salesCenter == null)
             {

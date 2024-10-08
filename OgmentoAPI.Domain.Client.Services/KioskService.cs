@@ -15,23 +15,36 @@ namespace OgmentoAPI.Domain.Client.Services
         {
             _kioskRepository = kioskRepository;
             _salesCenterService = salesCenterService;
-        }
+		}
 
-        public List<KioskModel> GetKioskDetails()
-        {
-            List<SalesCenterModel> salesCenters = _salesCenterService.GetAllSalesCenters();
-            List<KioskModel> kiosks = _kioskRepository.GetKioskDetails();
+		public List<KioskModel> GetKioskDetails()
+		{
+			List<SalesCenterModel> salesCenters = _salesCenterService.GetAllSalesCenters();
+			List<KioskModel> kiosks = _kioskRepository.GetKioskDetails();
 
-            kiosks.ForEach(kiosk =>
-            {
-                SalesCenterModel salesCenterInfo = salesCenters.First(salesCenter => salesCenter.SalesCenterId == kiosk.SalesCenterId);
-                kiosk.SalesCenter = new Tuple<Guid, string>(salesCenterInfo.SalesCenterUid, salesCenterInfo.SalesCenterName);
+			kiosks.ForEach(kiosk =>
+			{
+				SalesCenterModel salesCenterInfo = salesCenters.First(salesCenter => salesCenter.SalesCenterId == kiosk.SalesCenterId);
+				kiosk.SalesCenter = new Tuple<Guid, string>(salesCenterInfo.SalesCenterUid, salesCenterInfo.SalesCenterName);
 
-            });
-            return kiosks;
-        }
+			});
+			return kiosks;
+		}
+		public List<KioskModel> GetKioskDetails()
+		{
+			List<SalesCenterModel> salesCenters = _salesCenterService.GetAllSalesCenters();
+			List<KioskModel> kiosks = _kioskRepository.GetKioskDetails();
 
-        public int? UpdateKioskDetails(string kioskName, Guid salesCenterUid)
+			kiosks.ForEach(kiosk =>
+			{
+				SalesCenterModel salesCenterInfo = salesCenters.First(salesCenter => salesCenter.SalesCenterId == kiosk.SalesCenterId);
+				kiosk.SalesCenter = new Tuple<Guid, string>(salesCenterInfo.SalesCenterUid, salesCenterInfo.SalesCenterName);
+
+			});
+			return kiosks;
+		}
+
+		public int? UpdateKioskDetails(string kioskName, Guid salesCenterUid)
         {
             SalesCenter salesCenter = _salesCenterService.GetSalesCenterDetail(salesCenterUid);
             return _kioskRepository.UpdateKioskDetails(kioskName, salesCenter.ID);
