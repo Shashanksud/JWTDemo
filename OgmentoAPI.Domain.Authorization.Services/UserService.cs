@@ -12,10 +12,13 @@ namespace OgmentoAPI.Domain.Authorization.Services
     {
         private readonly IAuthorizationRepository _context;
         private readonly ISalesCenterService _salesCenterService;
-        public UserService(IAuthorizationRepository context, ISalesCenterService salesCenterService)
+		private readonly IKioskService _kioskService;
+
+		public UserService(IAuthorizationRepository context, ISalesCenterService salesCenterService, IKioskService kioskService)
         {
             _context = context;
             _salesCenterService = salesCenterService;
+			_kioskService = kioskService;
         }
 
         public UserModel GetUserDetail(int userId)
@@ -55,11 +58,14 @@ namespace OgmentoAPI.Domain.Authorization.Services
                 {
                     string userRole = _context.GetRoleName(userModel.UserId);
 					List<SalesCenter> salesCenterList = _salesCenterService.GetSalesCenterForUser(userModel.UserId).ToList();
-
+					List<int> saleCenterIds = salesCenterList.Select(s => s.ID).ToList();
+					List<KioskModel> kioskDetails = _kioskService.GetKioskDetails(saleCenterIds);
+					string kioskNames = string.Join(", ", kioskDetails.Select(kiosk => kiosk.KioskName));
+					userModel.KioskName = kioskNames;
 					Dictionary<Guid, string> salesCenterDictionary = salesCenterList.ToDictionary(sc => sc.SalesCenterUid, sc => sc.SalesCenterName);
                     userModel.UserRole = userRole;
-                    userModel.SalesCenters = salesCenterDictionary;
-                });
+					userModel.SalesCenters = salesCenterDictionary;
+				});
                 return userModels;
 
             }

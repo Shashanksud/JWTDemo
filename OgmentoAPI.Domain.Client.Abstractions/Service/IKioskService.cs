@@ -10,6 +10,7 @@ namespace OgmentoAPI.Domain.Client.Abstractions.Service
     public interface IKioskService
     {
         List<KioskModel> GetKioskDetails();
+        List<KioskModel> GetKioskDetails(List<int> salesCenterIds);
         int? UpdateKioskDetails(string kioskName, Guid salesCenterId);
 
         bool DeleteKioskByName(string kioskName);

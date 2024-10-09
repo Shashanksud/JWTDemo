@@ -12,6 +12,7 @@ namespace OgmentoAPI.Domain.Authorization.Abstractions.Dto
                 UserName = user.UserName,
                 UserRole = user.UserRole,
                 EmailId = user.Email,
+				KioskName=user.KioskName,
                 UserUId = user.UserUid,
                 City = user.City,
                 PhoneNumber = user.PhoneNumber,

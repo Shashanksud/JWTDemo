@@ -25,17 +25,8 @@ namespace OgmentoAPI.Domain.Client.Infrastructure.Repository
 		{
 			List<Kiosk> allDetail = _context.Kiosk.ToList();
 
-			List<KioskModel> kioskModels = allDetail.Select(x => new KioskModel
-			{
-				KioskName = x.KioskName,
-				SalesCenterId = x.SalesCenterId,
-				ID = x.ID,
-				IsActive = x.IsActive,
-				IsDeleted = x.IsDeleted,
-
-			}).ToList();
+			List<KioskModel> kioskModels = GetKiosk(allDetail);
 			return kioskModels;
-
 		}
 
 		public List<KioskModel> GetKioskDetails(List<int> salesCenterIds)
@@ -74,8 +65,8 @@ namespace OgmentoAPI.Domain.Client.Infrastructure.Repository
 
 		public List<KioskModel> GetKiosk(List<Kiosk> kiosk)
 		{
-			
-			List<KioskModel> kioskModels =kiosk.Select(x => new KioskModel
+
+			List<KioskModel> kioskModels = kiosk.Select(x => new KioskModel
 			{
 				KioskName = x.KioskName,
 				SalesCenterId = x.SalesCenterId,
